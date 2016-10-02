@@ -11,14 +11,22 @@ public class PersonTest extends TestCase {
 	}
 
 	public void testSetName() {
-		Person p1 = new Person();
-		p1.setName("Luke");
-		assertEquals("Luke", p1.getName());
+		Person p2 = new Person();
+		p2.setName("Luke");
+		assertEquals("Luke", p2.getName());
 	}
 
 	public void testSetMaximumBooks() {
-		Person p1 = new Person();
-		p1.setMaximumBooks(12);
-		assertEquals(12, p1.getMaximumBooks());
+		Person p3 = new Person();
+		p3.setMaximumBooks(12);
+		assertEquals(12, p3.getMaximumBooks());
+	}
+	
+	public void testToString() {
+		Person p4 = new Person();
+		p4.setName("Fred Flintstone");
+		p4.setMaximumBooks(69);
+		String testString = "Fred Flintstone (69 books)";
+		assertEquals(testString, p4.toString());
 	}
 }
