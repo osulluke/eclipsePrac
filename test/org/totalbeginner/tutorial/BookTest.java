@@ -9,4 +9,17 @@ public class BookTest extends TestCase {
 		assertEquals("Great Expectations", b1.title);
 		assertEquals("Unknown author", b1.author);
 	}
+	
+	public void testGetPerson(){
+		Book b2 = new Book("War and Peace");
+		Person p2 = new Person();
+		p2.setName("Elvis");
+		
+		//method that will determine who book is loaned to.
+		b2.setPerson(p2);
+		
+		//get the name of the person who has the book.
+		String testName = b2.getPerson().getName();
+		assertEquals("Elvis", testName);
+	}
 }

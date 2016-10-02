@@ -2,8 +2,9 @@ package org.totalbeginner.tutorial;
 
 public class Book {
 
-	public String title;
-	public String author;
+	String title;
+	String author;
+	Person person;
 
 	public Book(String string) {
 		// TODO Auto-generated constructor stub
@@ -21,6 +22,15 @@ public class Book {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public void setPerson(Person p2) {
+		// TODO Auto-generated method stub
+		this.person = p2;
+	}
+
+	public Person getPerson() {
+		return this.person;
 	}
 
 }
