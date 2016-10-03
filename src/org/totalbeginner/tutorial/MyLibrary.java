@@ -43,22 +43,29 @@ public class MyLibrary {
 
 	public boolean checkOut(Book b1, Person p1) {
 
-		if(b1.getPerson().getName() == null && books.contains(b1) == true){
+		if(b1.getPerson() == null && books.contains(b1))
+		{
 			b1.person = p1;
+			removeBook(b1);
 			return true;
 		}
-		else {
+		else 
+		{
 			return false;
 		}
 	}
 
-	public boolean checkIn(Book b1) {
-		if (b1.getPerson().getName() == null){
-			return false;
-		}
-		else {
-			b1.person = null;
+	public boolean checkIn(Book b1) 
+	{
+		if (b1.getPerson() != null)
+		{
+			b1.setPerson(null);
+			addBook(b1);
 			return true;
+		}
+		else 
+		{
+			return false;
 		}
 	}
 
