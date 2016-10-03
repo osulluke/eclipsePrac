@@ -53,7 +53,6 @@ public class MyLibrary {
 	}
 
 	public boolean checkIn(Book b1) {
-		// TODO Auto-generated method stub
 		if (b1.getPerson().getName() == null){
 			return false;
 		}
