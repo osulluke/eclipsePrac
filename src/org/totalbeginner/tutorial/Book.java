@@ -31,5 +31,9 @@ public class Book {
 	public Person getPerson() {
 		return this.person;
 	}
+	
+	public String toString() {
+		return this.person.getName() + " checked out this book: " + title + ".";
+	}
 
 }

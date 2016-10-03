@@ -42,11 +42,12 @@ public class MyLibrary {
 	}
 
 	public boolean checkOut(Book b1, Person p1) {
-
-		if(b1.getPerson() == null && books.contains(b1))
+		int booksOut = this.getBooksForPerson(p1).size();
+		
+		if((b1.getPerson() == null) && 
+				(booksOut < p1.getMaximumBooks()))
 		{
-			b1.person = p1;
-			removeBook(b1);
+			b1.setPerson(p1);
 			return true;
 		}
 		else 
@@ -60,7 +61,6 @@ public class MyLibrary {
 		if (b1.getPerson() != null)
 		{
 			b1.setPerson(null);
-			addBook(b1);
 			return true;
 		}
 		else 
@@ -68,5 +68,37 @@ public class MyLibrary {
 			return false;
 		}
 	}
+	
+	public ArrayList<Book> getBooksForPerson(Person p1) {
+		
+		//result here is used as a list to hold books someone has checked out.
+		ArrayList<Book> result = new ArrayList<Book>();
+		
+		/*
+		The this.getBooks() in the for each loop returns ALL the books that are
+		currently checked out, then basically looks to see if the name of
+		the person who checked it out matches the name of the person you're
+		populating the list for. Oh, it also ensures the book is actually
+		checked out...hence the aBook.getPerson() != null statement.
+		*/
+		for (Book aBook : this.getBooks()) {
+			if ((aBook.getPerson() != null) && 
+					(aBook.getPerson().getName().equals(p1.getName())))
+			{
+				result.add(aBook);
+			}
+		}
+		return result;
+	}
 
+	public String toString(){
+		String outString;
+		outString = "Name is " + this.name 
+				+ ".\nBooks length is " + this.books.size() 
+				+ ".\nPeople length is " + this.people.size() 
+				+ ".\nArray: " + this.books
+				+ ".\n";
+		
+		return outString;
+	}
 }

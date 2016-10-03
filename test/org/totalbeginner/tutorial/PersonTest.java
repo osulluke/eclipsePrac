@@ -7,7 +7,7 @@ public class PersonTest extends TestCase {
 	public void testPerson() {
 		Person p1 = new Person();
 		assertEquals("Unknown name", p1.getName());
-		assertEquals(3, p1.getMaximumBooks());
+		assertEquals(1, p1.getMaximumBooks());
 	}
 
 	public void testSetName() {

@@ -45,7 +45,10 @@ public class MyLibraryTest extends TestCase {
 		
 		assertTrue(ml.books instanceof ArrayList);
 		assertTrue(ml.people instanceof ArrayList);
+		assertEquals(0, ml.books.size());
+		assertEquals(0, ml.people.size());
 
+		System.out.println(ml.toString());
 	}
 	
 	//testAddBook - in actuality, this method does a lot more than just testing addBook...
@@ -106,6 +109,9 @@ public class MyLibraryTest extends TestCase {
 		assertEquals(1, ml.getPeople().size());
 		ml.removePerson(p4);
 		assertEquals(0, ml.getPeople().size());
+		
+		System.out.println("testAddBook library (ml) name: ");
+		System.out.println(ml.toString());
 	}
 
 	//testCheckOut
@@ -125,39 +131,61 @@ public class MyLibraryTest extends TestCase {
 		assertFalse("Book was never checked out. b2 was never removed.", ml.checkIn(b2));
 		
 		//additional tests for maximumBooks
-		setup();
-		addItems();
+		//setup();
+		//addItems();
 		
 		assertTrue("First book did not check out.",ml.checkOut(b1, p1));
 		assertFalse("Second book should not have checked out.",ml.checkOut(b2, p1));
+		assertTrue("Book check in failed. Why did it fail?", ml.checkIn(b1));
+		
+		//Print some info about the library itself:
+		System.out.println("testCheckOut library (ml) name: \n");
+		System.out.println(ml.toString());
 	}
 
 	private void addItems(){
+		//this is just a convenience function to save typing...
 		ml.addBook(b1);
 		ml.addBook(b2);
 		ml.addPerson(p1);
 		ml.addPerson(p2);
 	}
 	
-	testGetBooksForPerson(){
+	public void testGetBooksForPerson(){
 		setup();
 		addItems();
-		
+		//System.out.println(ml.toString());
 		//Make a data structure to hold the person's checked out books
-		ArrayList<Book> testBooks = ml.getBooksForPerson(p1);
+		ArrayList<Book> testBooks = new ArrayList<Book>();
+		ArrayList<Book> testBooks2 = new ArrayList<Book>();
+			System.out.println("testBooks created.");
+		
+		assertEquals(0, testBooks.size()); System.out.printf("Test passed...testBook size = %d.\n", testBooks.size());
+			System.out.println(testBooks.toString());
+		testBooks = ml.getBooksForPerson(p1);
+		testBooks2 = ml.getBooksForPerson(p2);
+			System.out.println(testBooks.toString());
+		assertEquals(0, testBooks.size());
+			System.out.printf("testBook size = %d.\n", testBooks.size());
 		
 		//Make sure the list starts empty, then checkout one book.
-		assertEquals(0, testBooks.size());
 		ml.checkOut(b1,p1);
+		ml.checkOut(b2, p2);
+			System.out.printf("b1 checked out to p1.\n"); System.out.println(b1.toString());
+			System.out.printf("b2 checked out to p2.\n"); System.out.println(b2.toString());
+			System.out.printf("testBook size = %d.\n", testBooks.size());
+		assertEquals(1, testBooks.size()); System.out.printf("assertEquals completed.");
+			System.out.printf("testBook size = %d.\n", testBooks.size());
+			System.out.printf("testBooks2 size = %d.\n", testBooks2.size());
 		
 		//Check that the person's item list contains one book, and that it's index is zero.
-		assertEquals(1, testBooks.size());
+		ml.toString();
 		assertEquals(0, testBooks.indexOf(b1));
 
 		//Checkout another book, and makes sure that it is not allowed.
 		ml.checkOut(b2, p1);
-		assertEquals(1, testBooks.size());
-		assertEquals(0, testBooks.indexOf(b1));
-		assertFalse("Person 'p1' can't checkout more than one book!", testBooks.size() < p1.getMaximumBooks());
+		assertEquals(2, testBooks.size());
+		assertEquals(1, testBooks.indexOf(b2));
+		assertFalse("Person 'p1' can't checkout more than one book!", testBooks.size() > p1.getMaximumBooks());
 	}
 }
