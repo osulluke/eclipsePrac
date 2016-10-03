@@ -129,6 +129,11 @@ public class MyLibraryTest extends TestCase {
 		
 		//additional tests for maximumBooks
 		setup();
+		ml.addBook(b1);
+		ml.addBook(b2);
+		ml.addPerson(p1);
+		ml.addPerson(p2);
+		
 		assertTrue("First book did not check out.",ml.checkOut(b1, p1));
 		assertFalse("Second book should not have checked out.",ml.checkOut(b1, p2));
 	}
