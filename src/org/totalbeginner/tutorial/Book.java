@@ -7,7 +7,7 @@ public class Book {
 	Person person;
 
 	public Book(String string) {
-		// TODO Auto-generated constructor stub
+		//test to see if book is already checked out. True/False.
 		this.title = string;
 		this.author = "Unknown author";
 	}
@@ -25,7 +25,6 @@ public class Book {
 	}
 
 	public void setPerson(Person p2) {
-		// TODO Auto-generated method stub
 		this.person = p2;
 	}
 
