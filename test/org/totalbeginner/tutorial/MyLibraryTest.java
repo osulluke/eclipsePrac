@@ -112,10 +112,7 @@ public class MyLibraryTest extends TestCase {
 	public void testCheckOut(){
 		//need to use setup again, because these are different tests.
 		setup();
-		ml.addBook(b1);
-		ml.addBook(b2);
-		ml.addPerson(p1);
-		ml.addPerson(p2);
+		addItems();
 		
 		//test to see if book is already checked out. True/False.
 		assertTrue("Book did not check out correctly.", ml.checkOut(b1,p1));
@@ -129,12 +126,38 @@ public class MyLibraryTest extends TestCase {
 		
 		//additional tests for maximumBooks
 		setup();
+		addItems();
+		
+		assertTrue("First book did not check out.",ml.checkOut(b1, p1));
+		assertFalse("Second book should not have checked out.",ml.checkOut(b2, p1));
+	}
+
+	private void addItems(){
 		ml.addBook(b1);
 		ml.addBook(b2);
 		ml.addPerson(p1);
 		ml.addPerson(p2);
+	}
+	
+	testGetBooksForPerson(){
+		setup();
+		addItems();
 		
-		assertTrue("First book did not check out.",ml.checkOut(b1, p1));
-		assertFalse("Second book should not have checked out.",ml.checkOut(b2, p1));
+		//Make a data structure to hold the person's checked out books
+		ArrayList<Book> testBooks = ml.getBooksForPerson(p1);
+		
+		//Make sure the list starts empty, then checkout one book.
+		assertEquals(0, testBooks.size());
+		ml.checkOut(b1,p1);
+		
+		//Check that the person's item list contains one book, and that it's index is zero.
+		assertEquals(1, testBooks.size());
+		assertEquals(0, testBooks.indexOf(b1));
+
+		//Checkout another book, and makes sure that it is not allowed.
+		ml.checkOut(b2, p1);
+		assertEquals(1, testBooks.size());
+		assertEquals(0, testBooks.indexOf(b1));
+		assertFalse("Person 'p1' can't checkout more than one book!", testBooks.size() < p1.getMaximumBooks());
 	}
 }
