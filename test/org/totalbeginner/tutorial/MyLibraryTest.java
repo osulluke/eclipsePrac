@@ -127,8 +127,9 @@ public class MyLibraryTest extends TestCase {
 		assertFalse("Book just checked in. Why was book already checked in, allowed to be checked in again?", ml.checkIn(b1));
 		assertFalse("Book was never checked out. b2 was never removed.", ml.checkIn(b2));
 		
-		//if not checked out, set person field in book to the person who's checking out the book
-		
-		//otherwise, let the calling method know the checkout didn't work.
+		//additional tests for maximumBooks
+		setup();
+		assertTrue("First book did not check out.",ml.checkOut(b1, p1));
+		assertFalse("Second book should not have checked out.",ml.checkOut(b1, p2));
 	}
 }

@@ -8,7 +8,7 @@ public class Person {
 	//constructors
 	public Person(){
 		name = "Unknown name";
-		maximumBooks = 3;
+		maximumBooks = 1;
 	}
 	
 	//methods
