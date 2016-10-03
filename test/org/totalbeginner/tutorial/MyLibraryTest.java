@@ -107,4 +107,28 @@ public class MyLibraryTest extends TestCase {
 		ml.removePerson(p4);
 		assertEquals(0, ml.getPeople().size());
 	}
+
+	//testCheckOut
+	public void testCheckOut(){
+		//need to use setup again, because these are different tests.
+		setup();
+		ml.addBook(b1);
+		ml.addBook(b2);
+		ml.addPerson(p1);
+		ml.addPerson(p2);
+		
+		//test to see if book is already checked out. True/False.
+		assertTrue("Book did not check out correctly.", ml.checkOut(b1,p1));
+		assertEquals("Person 1", b1.getPerson().getName());
+		assertFalse("Book is already checked out.", ml.checkOut(b1,p2));
+		
+		//test check in methods and make sure they work.
+		assertTrue("Book check in failed. Why did it fail?", ml.checkIn(b1));
+		assertFalse("Book just checked in. Why was book already checked in, allowed to be checked in again?", ml.checkIn(b1));
+		assertFalse("Book was never checked out. b2 was never removed.", ml.checkIn(b2));
+		
+		//if not checked out, set person field in book to the person who's checking out the book
+		
+		//otherwise, let the calling method know the checkout didn't work.
+	}
 }
